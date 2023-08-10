@@ -26,7 +26,7 @@ const courseSchema = new mongoose.Schema({
   description: String,
   price: Number,
   imageLink: String,
-  published: Boolean
+  published: String
 });
 
 const User= mongoose.model('User', userSchema);
@@ -55,7 +55,7 @@ const authenticateJwt = (req, res, next) => {
   }
 };
 
-const SECRET = 'secretkeyy';
+
 
 // Admin routes
 app.post('/admin/signup', (req, res) => {
@@ -67,7 +67,7 @@ app.post('/admin/signup', (req, res) => {
       const obj = {username: username , password: password};
       const newAdmin = new Admin(obj);
       newAdmin.save();
-      const token= jwt.sign({username , role:'admin'}, SECRET, {expiresIn : '1h'});
+      const token= jwt.sign({username , role:'admin'}, process.env.SECRET_KEY, {expiresIn : '1h'});
       res.json({message: 'Admin registered successfully', token});
     }
   }
@@ -79,7 +79,7 @@ app.post('/admin/login', async (req, res) => {
   const { username, password } = req.body;
   const admin = await Admin.findOne({ username, password });
   if (admin) {
-    const token = jwt.sign({ username, role: 'admin' }, SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ username, role: 'admin' }, process.env.SECRET_KEY, { expiresIn: '1h' });
     res.json({ message: 'Logged in successfully', token });
   } else {
     res.status(403).json({ message: 'Invalid username or password' });
@@ -117,7 +117,7 @@ app.post('/users/signup', async (req, res) => {
     }
       const newUser= await User(req.body);
       newUser.save();
-      const token = jwt.sign({username: username}, SECRET, {expiresIn: '1h'});
+      const token = jwt.sign({username: username}, process.env.SECRET_KEY, {expiresIn: '1h'});
       res.json({message: 'User registered successfully', token});
     
 });
@@ -126,7 +126,7 @@ app.post('/users/login', async (req, res) => {
   const {username, password}=  req.headers
   const user= await User.findOne({username , password});
   if(user){
-    const token= jwt.sign({username: username}, SECRET, {expiresIn: "1h"});
+    const token= jwt.sign({username: username}, process.env.SECRET_KEY, {expiresIn: "1h"});
     res.json({message: "User logged in successfully" , token});
   }else{
     return res.json({message: "Logged in failed"});

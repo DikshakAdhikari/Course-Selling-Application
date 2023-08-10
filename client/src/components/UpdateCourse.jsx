@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Card, TextField, Typography, Button } from "@mui/material";
+import { Button, Card, FormControl, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 import { PORT_LINK } from "../Config";
 import axios from "axios";
@@ -57,7 +57,7 @@ const UpdateCard = () => {
   const [description, setDesc] = useState(currentCourse.courses.description);
   const [price, setPrice] = useState(currentCourse.courses.price);
   const [imageLink, setImage] = useState(currentCourse.courses.imageLink);
-
+  const [published, setPublished] = useState(currentCourse.courses.published);
   const navigate= useNavigate();
 
   useEffect(() => {
@@ -75,6 +75,10 @@ const UpdateCard = () => {
   useEffect(() => {
     setPrice(currentCourse.courses.price);
   }, [currentCourse.courses.price]);
+  
+  useEffect(() => {
+    setPublished(currentCourse.courses.published);
+  }, [currentCourse.courses.published]);
 
   //console.log(description);
 
@@ -137,6 +141,22 @@ const UpdateCard = () => {
           />
           <br />
           <br />
+          <FormControl fullWidth>
+            <InputLabel id="demo-simple-select-label">Publish</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              label="publish"
+              value={published}
+              onChange={(e)=> setPublished(e.target.value)}
+            
+            >
+              <MenuItem value={true}>true</MenuItem>
+              <MenuItem value={false}>false</MenuItem>
+            </Select>
+          </FormControl>
+          <br />
+          <br />
 
           <Button
             variant="contained"
@@ -150,7 +170,7 @@ const UpdateCard = () => {
                     description: description,
                     imageLink: imageLink,
                     price: price,
-                    published: true,
+                    published: published,
                   },
                   {
                     headers: {
@@ -164,7 +184,7 @@ const UpdateCard = () => {
                   description: description,
                   imageLink: imageLink,
                   price: price,
-                  published: true,
+                  published: published,
                 }
                 setCourse({
                   isLoading:false,
