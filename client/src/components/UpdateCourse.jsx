@@ -22,7 +22,7 @@ export const UpdateCourse = () => {
         const response = await axios.get(`${PORT_LINK}/admin/${courseId}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         });
-        console.log(response.data.course);
+       // console.log(response.data.course);
         setRecoilCourse({
           isLoading: false,
           courses: response.data.course,
@@ -38,7 +38,7 @@ export const UpdateCourse = () => {
   if(courseLoading){
     return <Loading />
   }
-  console.log(detail);
+ // console.log(detail);
  
   return (
     <div>
@@ -53,10 +53,10 @@ export const UpdateCourse = () => {
 const UpdateCard = () => {
   const [currentCourse, setCourse] = useRecoilState(courseState); // not using any selector instead using the original courseState to set updated course value
 
-  const [title, setTitle] = useState();
-  const [description, setDesc] = useState();
-  const [price, setPrice] = useState();
-  const [imageLink, setImage] = useState();
+  const [title, setTitle] = useState(currentCourse.courses.title);
+  const [description, setDesc] = useState(currentCourse.courses.description);
+  const [price, setPrice] = useState(currentCourse.courses.price);
+  const [imageLink, setImage] = useState(currentCourse.courses.imageLink);
 
   const navigate= useNavigate();
 
