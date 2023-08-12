@@ -3,11 +3,11 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; //point to be noted my lord
-import { Appbar } from './components/Appbar'
-import { Signup } from './components/Signup'
-import { Signin } from './components/Signin'
-import { AddCourses } from './components/AddCourses';
-import { Courses } from './components/Courses';
+import { Appbar } from '../src/components/admin/Appbar'
+import { Signup } from '../src/components/admin/Signup'
+import { Signin } from '../src/components/admin/Signin'
+import { AddCourses } from '../src/components/admin/AddCourses';
+import { Courses } from '../src/components/admin/Courses';
 import { useSetRecoilState } from "recoil";
 
 import React from 'react';
@@ -20,11 +20,13 @@ import {
 } from 'recoil';
 import axios from 'axios';
 import { PORT_LINK } from './Config';
-import { UserEmail } from './store/selectors/User';
-import { userState } from './store/atoms/user';
-import { UpdateCourse } from './components/UpdateCourse';
-import { Dashboard } from './components/Dashboard';
 
+import { userState } from './store/atoms/user';
+import { UpdateCourse } from '../src/components/admin/UpdateCourse';
+import { Dashboard } from '../src/components/admin/Dashboard';
+import { UserSignup } from './components/user/UserSignup';
+import { UserSignin } from './components/user/UserSignin';
+import { UserCourses } from './components/user/UserCourses';
 function App() {
   
   return (
@@ -42,6 +44,9 @@ function App() {
         <Route path={"/addCourses"} element= {<AddCourses />} />
         <Route path={"/courses"} element= {<Courses />} />
         <Route path={"/updateCourse/:courseId"} element= {<UpdateCourse />} />
+        <Route path={"/user/signup"} element= {<UserSignup />} />
+        <Route path={"/user/signin"} element= {<UserSignin />} />    
+        <Route path={"/user/userCourses"} element= {<UserCourses />} />    
       </Routes>
 
     </Router>

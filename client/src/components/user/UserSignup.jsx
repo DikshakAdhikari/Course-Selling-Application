@@ -3,9 +3,10 @@ import Button from '@mui/material/Button';
 import { Card, TextField, Typography } from '@mui/material';
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
-import { PORT_LINK } from '../Config';
+import { PORT_LINK } from '../../Config';
 
-export const Signup = () => {
+
+export const UserSignup = () => {
   const [email, setEmail]= useState([]);
   const [password, setPassword] =useState([]);
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ export const Signup = () => {
       display: "flex",
       justifyContent: "center"
     }}>
-    <Typography variant={"h6"} >Coursera</Typography>
+    <Typography variant={"h6"} >User Signup</Typography>
       </div>
       
       <div style={{display: "flex",justifyContent:"center" }}>
@@ -31,10 +32,10 @@ export const Signup = () => {
         }} />
         <br/><br/>
         <Button variant="contained" size={"large"} onClick={async()=> {
-          const response = await axios.post(`${PORT_LINK}/admin/signup`, {username: email , password: password});
+          const response = await axios.post(`${PORT_LINK}/users/signup`, {username: email , password: password});
           let data = response.data.token;
-          localStorage.setItem('token',data)
-          navigate('/');
+          localStorage.setItem('tokenUser',data)
+          navigate('/user/signin');
 
         }} >Signup</Button>
          

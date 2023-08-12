@@ -2,7 +2,8 @@ import { Button, Card, FormControl, InputLabel, MenuItem, Select, TextField, Typ
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { PORT_LINK } from "../Config";
+import { PORT_LINK } from "../../Config";
+
 
 export const AddCourses = () => {
   const [title, setTitle] = useState("");

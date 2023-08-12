@@ -55,6 +55,25 @@ const authenticateJwt = (req, res, next) => {
   }
 };
 
+const userAuthenticateJwt = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+  //console.log(authHeader);
+  if (authHeader) {
+    const token = authHeader.split(' ')[1];
+    jwt.verify(token, process.env.SECRET_KEY_USER, (err, user) => {
+      if (err) {
+       
+        return res.sendStatus(403)
+      }
+      req.user = user;
+      next();
+    });
+  } else {
+    res.sendStatus(401);
+  }
+};
+
+
 
 
 // Admin routes
@@ -117,7 +136,7 @@ app.post('/users/signup', async (req, res) => {
     }
       const newUser= await User(req.body);
       newUser.save();
-      const token = jwt.sign({username: username}, process.env.SECRET_KEY, {expiresIn: '1h'});
+      const token = jwt.sign({username: username}, process.env.SECRET_KEY_USER, {expiresIn: '1h'});
       res.json({message: 'User registered successfully', token});
     
 });
@@ -126,21 +145,22 @@ app.post('/users/login', async (req, res) => {
   const {username, password}=  req.headers
   const user= await User.findOne({username , password});
   if(user){
-    const token= jwt.sign({username: username}, process.env.SECRET_KEY, {expiresIn: "1h"});
+    const token= jwt.sign({username: username}, process.env.SECRET_KEY_USER, {expiresIn: "1h"});
     res.json({message: "User logged in successfully" , token});
   }else{
     return res.json({message: "Logged in failed"});
   }
 });
 
-app.get('/users/courses', authenticateJwt, async (req, res) => {
-  //const userCourses= await Course.find({published: true});
-  const userCourses= await Course.find({});
+app.get('/users/courses', userAuthenticateJwt, async (req, res) => {
+  const userCourses= await Course.find({published: true});
+  //console.log(userCourses);
+  //const userCourses= await Course.find({});
 res.json({userCourses});
   
 });
 
-app.post('/users/courses/:courseId',authenticateJwt, async (req, res) => {
+app.post('/users/courses/:courseId',userAuthenticateJwt, async (req, res) => {
   const course=  await Course.findById(req.params.courseId);
   if(course){
     const user = await User.findOne({username: req.user.username});
@@ -156,7 +176,7 @@ app.post('/users/courses/:courseId',authenticateJwt, async (req, res) => {
   }
 });
 
-app.get('/users/purchasedCourses', authenticateJwt, async (req, res) => {
+app.get('/users/purchasedCourses', userAuthenticateJwt, async (req, res) => {
   // const user1 = await User.findOne({ username: req.user.username })
   // console.log(user1);
   const user = await User.findOne({ username: req.user.username }).populate('purchasedCourses');

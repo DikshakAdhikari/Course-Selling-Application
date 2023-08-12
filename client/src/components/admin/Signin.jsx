@@ -3,10 +3,11 @@ import Button from "@mui/material/Button";
 import { Card, TextField, Typography } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { PORT_LINK } from "../Config";
+
 import { useSetRecoilState } from "recoil";
-import { UserEmail } from "../store/selectors/User";
-import { userState } from "../store/atoms/user";
+
+import { userState } from "../../store/atoms/user"
+import { PORT_LINK } from "../../Config";
 
 
 export const Signin = () => {

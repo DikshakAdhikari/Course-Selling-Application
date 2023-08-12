@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Button, Card, FormControl, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
-import { PORT_LINK } from "../Config";
+import { PORT_LINK } from "../../Config";
 import axios from "axios";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import { courseState } from "../store/atoms/course";
-import { courseDetails, isCourseLoading } from "../store/selectors/Course";
+import { courseState } from "../../store/atoms/course";
+import { courseDetails, isCourseLoading } from "../../store/selectors/Course";
 import { Loading } from "./Loading";
 export const UpdateCourse = () => {
   const params = useParams();
