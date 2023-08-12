@@ -47,6 +47,7 @@ const authenticateJwt = (req, res, next) => {
       if (err) {
         return res.sendStatus(403);
       }
+      console.log(user);
       req.user = user;
       next();
     });
@@ -57,24 +58,22 @@ const authenticateJwt = (req, res, next) => {
 
 const userAuthenticateJwt = (req, res, next) => {
   const authHeader = req.headers.authorization;
-  //console.log(authHeader);
+  
   if (authHeader) {
     const token = authHeader.split(' ')[1];
-    jwt.verify(token, process.env.SECRET_KEY_USER, (err, user) => {
+    
+    jwt.verify(token, process.env.SECRET_KEY_USER, (err, payload) => {
       if (err) {
-       
         return res.sendStatus(403)
       }
-      req.user = user;
+      //console.log(payload);
+      req.user = payload;
       next();
     });
   } else {
     res.sendStatus(401);
   }
 };
-
-
-
 
 // Admin routes
 app.post('/admin/signup', (req, res) => {
@@ -130,25 +129,27 @@ app.get('/admin/courses', authenticateJwt, async (req, res) => {
 // User routes
 app.post('/users/signup', async (req, res) => {
     const {username, password} = req.body;
+    //console.log(req.body);
     const user = await User.findOne({username: username});
     if(user){
       return res.json({message: "User already exists"});
     }
-      const newUser= await User(req.body);
+      const newUser= new User(req.body);
       newUser.save();
-      const token = jwt.sign({username: username}, process.env.SECRET_KEY_USER, {expiresIn: '1h'});
+      const token = jwt.sign({username, role:'user'}, process.env.SECRET_KEY_USER, {expiresIn: '1h'});
       res.json({message: 'User registered successfully', token});
     
 });
 
 app.post('/users/login', async (req, res) => {
-  const {username, password}=  req.headers
-  const user= await User.findOne({username , password});
+  const {username, password}=  req.body
+  //console.log(username);
+  const user= await User.findOne({username:username , password:password});
   if(user){
-    const token= jwt.sign({username: username}, process.env.SECRET_KEY_USER, {expiresIn: "1h"});
+    const token= jwt.sign({username, role:'user'}, process.env.SECRET_KEY_USER, {expiresIn: "1h"});
     res.json({message: "User logged in successfully" , token});
   }else{
-    return res.json({message: "Logged in failed"});
+    return res.status(403).json({message: "Logged in failed"});
   }
 });
 
@@ -162,8 +163,10 @@ res.json({userCourses});
 
 app.post('/users/courses/:courseId',userAuthenticateJwt, async (req, res) => {
   const course=  await Course.findById(req.params.courseId);
+  //console.log(course);
   if(course){
     const user = await User.findOne({username: req.user.username});
+    //console.log(user);
     if(user){
       user.purchasedCourses.push(course);
       await user.save();

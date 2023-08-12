@@ -27,6 +27,7 @@ import { Dashboard } from '../src/components/admin/Dashboard';
 import { UserSignup } from './components/user/UserSignup';
 import { UserSignin } from './components/user/UserSignin';
 import { UserCourses } from './components/user/UserCourses';
+import { PurchasedCourses } from './components/user/PurchasedCourses';
 function App() {
   
   return (
@@ -47,6 +48,8 @@ function App() {
         <Route path={"/user/signup"} element= {<UserSignup />} />
         <Route path={"/user/signin"} element= {<UserSignin />} />    
         <Route path={"/user/userCourses"} element= {<UserCourses />} />    
+        <Route path={"/user/purchasedCourses/:courseId"} element= {<PurchasedCourses />} />    
+
       </Routes>
 
     </Router>
