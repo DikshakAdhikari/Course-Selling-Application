@@ -21,7 +21,7 @@ export const Appbar = () => {
             flexDirection: "row-reverse",
             gap: "10px",
             padding: 10,
-            marginBottom:50
+            marginBottom:30
           }}
         >
           <Button variant="contained" onClick={() => navigate("/signup")}>

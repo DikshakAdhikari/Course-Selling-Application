@@ -47,7 +47,7 @@ const authenticateJwt = (req, res, next) => {
       if (err) {
         return res.sendStatus(403);
       }
-      console.log(user);
+    //   console.log(user);
       req.user = user;
       next();
     });
@@ -66,7 +66,7 @@ const userAuthenticateJwt = (req, res, next) => {
       if (err) {
         return res.sendStatus(403)
       }
-      //console.log(payload);
+     // console.log(payload);
       req.user = payload;
       next();
     });
@@ -143,7 +143,7 @@ app.post('/users/signup', async (req, res) => {
 
 app.post('/users/login', async (req, res) => {
   const {username, password}=  req.body
-  //console.log(username);
+  console.log(username);
   const user= await User.findOne({username:username , password:password});
   if(user){
     const token= jwt.sign({username, role:'user'}, process.env.SECRET_KEY_USER, {expiresIn: "1h"});
@@ -166,7 +166,7 @@ app.post('/users/courses/:courseId',userAuthenticateJwt, async (req, res) => {
   //console.log(course);
   if(course){
     const user = await User.findOne({username: req.user.username});
-    //console.log(user);
+    console.log(req.user);
     if(user){
       user.purchasedCourses.push(course);
       await user.save();
@@ -192,10 +192,44 @@ app.get('/users/purchasedCourses', userAuthenticateJwt, async (req, res) => {
 });
 
 app.get('/admin/me' , authenticateJwt, async (req,res)=> {
-  const username= req.user.username;
+  try{
+    const username= req.user.username;
  
   res.json(username);
+  }catch(err){
+    res.json(err)
+  }
+  
 } );
+
+app.get('/users/me' , userAuthenticateJwt, async (req,res)=> {
+  try{
+    const username= req.user;
+    //console.log(username);
+ 
+  res.json(username);
+  }catch(err){
+    console.log(err);
+    res.json(err)
+  }
+  
+} );
+
+app.get('/users/:courseId', userAuthenticateJwt, async (req,res)=> {
+  const {courseId} = req.params;
+  try{
+    const course = await Course.findById(courseId);
+  //console.log(course);
+  if(course){
+    res.json({course});
+  }else{
+    res.sendStatus(403);
+  }
+  }catch(err){
+    res.json(err);
+  }
+  
+})
 
 app.get('/admin/:courseId', authenticateJwt, async (req,res)=> {
   const {courseId}=  req.params;
@@ -209,7 +243,7 @@ app.get('/admin/:courseId', authenticateJwt, async (req,res)=> {
 
 app.delete('/admin/course/:courseId', authenticateJwt, async (req,res)=> {
   const {courseId}= req.params;
-  console.log(courseId);
+  //console.log(courseId);
   try{
      await Course.findByIdAndDelete(courseId);
      res.json({message: 'Course deleted successfully'})
@@ -217,7 +251,10 @@ app.delete('/admin/course/:courseId', authenticateJwt, async (req,res)=> {
   }catch(err){    
     res.status(404).json(err);
   }
-})
+});
+
+
+
 
 
 app.listen(3000, () => {

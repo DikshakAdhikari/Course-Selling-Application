@@ -211,23 +211,24 @@ const UpdateCard = () => {
             variant="contained"
             size={"large"}
             onClick={async () => {
-              try{
-                await axios.delete(
-                  `${PORT_LINK}/admin/course/${currentCourse.courses._id}`,
-                  
-                  {
-                    headers: {
-                      Authorization: `Bearer ${localStorage.getItem("token")}`,
-                    },
-                  }
-                );
-               alert('Course deleted successfully!')
-
-                navigate('/courses')
-              } catch(err){
-                console.log("error in UpdateCourses");
-                console.log(err);
-              }        
+              const confirmDelete = window.confirm('Are you sure you want to delete this item?');
+              if (confirmDelete) {
+                try {
+                  await axios.delete(
+                    `${PORT_LINK}/admin/course/${currentCourse.courses._id}`,
+                    
+                    {
+                      headers: {
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                      },
+                    }
+                  );
+                  navigate('/courses')
+                } catch (error) {
+                  console.error('Error deleting item:', error);
+                }
+              }
+      
             }
           }
 
