@@ -30,6 +30,7 @@ import { UserCourses } from './components/user/UserCourses';
 import { PurchasedCourses } from './components/user/PurchasedCourses';
 import { Purchase } from './components/user/Purchase';
 import { userCourseState } from './store/atoms/userCourses';
+import { Purchased } from './components/user/Purchased';
 function App() {
   
   return (
@@ -52,6 +53,8 @@ function App() {
         <Route path={"/user/signin"} element= {<UserSignin />} />    
         <Route path={"/user/userCourses"} element= {<UserCourses />} />    
         <Route path={"/user/purchase/:courseId"} element= {<Purchase />} />    
+        <Route path={"/user/purchased/:courseId"} element= {<Purchased />} />    
+        <Route path={"/user/userPurchasedCourses"} element= {<PurchasedCourses />} />    
 
       </Routes>
 

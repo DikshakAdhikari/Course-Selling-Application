@@ -73,7 +73,7 @@ const Course = ({ course }) => {
           alt= {course.title}
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
+          <Typography gutterBottom variant="h5" component="div"  fontWeight="bold">
           {course.title}
           </Typography>
           <Typography variant="body2" color="text.secondary">

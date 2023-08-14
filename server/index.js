@@ -143,7 +143,7 @@ app.post('/users/signup', async (req, res) => {
 
 app.post('/users/login', async (req, res) => {
   const {username, password}=  req.body
-  console.log(username);
+  //console.log(username);
   const user= await User.findOne({username:username , password:password});
   if(user){
     const token= jwt.sign({username, role:'user'}, process.env.SECRET_KEY_USER, {expiresIn: "1h"});
@@ -166,7 +166,7 @@ app.post('/users/courses/:courseId',userAuthenticateJwt, async (req, res) => {
   //console.log(course);
   if(course){
     const user = await User.findOne({username: req.user.username});
-    console.log(req.user);
+    //console.log(req.user);
     if(user){
       user.purchasedCourses.push(course);
       await user.save();
