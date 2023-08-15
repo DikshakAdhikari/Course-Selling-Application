@@ -58,6 +58,7 @@ const authenticateJwt = (req, res, next) => {
 
 const userAuthenticateJwt = (req, res, next) => {
   const authHeader = req.headers.authorization;
+  //console.log(authHeader);
   
   if (authHeader) {
     const token = authHeader.split(' ')[1];
@@ -170,7 +171,8 @@ app.post('/users/courses/:courseId',userAuthenticateJwt, async (req, res) => {
     if(user){
       user.purchasedCourses.push(course);
       await user.save();
-      res.json({message: "Course added successfully"});
+      //console.log(user);
+      res.json({purchasedCourses: user.purchasedCourses});
     }else{
       res.json({message: "User not found"});
     }
@@ -190,6 +192,16 @@ app.get('/users/purchasedCourses', userAuthenticateJwt, async (req, res) => {
     res.status(403).json({ message: 'User not found' });
   }
 });
+
+app.get('/users/ids/purchasedCourses', userAuthenticateJwt, async(req,res)=> { // trying to get id's of courses inside user.purchasedCourses
+  const user = await User.findOne({ username: req.user.username });
+  
+  if (user) {
+    res.json({ purchasedCoursesIds: user.purchasedCourses || [] });
+  } else {
+    res.status(403).json({ message: 'User not found' });
+  }
+})
 
 app.get('/admin/me' , authenticateJwt, async (req,res)=> {
   try{

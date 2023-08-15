@@ -20,6 +20,7 @@ export const Purchase = () => {
   const params= useParams();
   const {courseId} = params
   const [course, setCourse]= useState({});
+  const [courseValues, setValues]= useState([])
   const navigate= useNavigate()
   useEffect(()=> {
     const fun  = async()=> {
@@ -28,8 +29,20 @@ export const Purchase = () => {
       setCourse(course.data.course)
     }
 
+    const purchasedIds= async ()=> {
+      const courseIds= await axios.get('http://localhost:3000/users/ids/purchasedCourses', {headers: {Authorization:'Bearer '+localStorage.getItem('tokenUser')}});
+      console.log(courseIds.data.purchasedCoursesIds);
+      setValues(courseIds.data.purchasedCoursesIds)
+
+    }
+    purchasedIds();
+
     fun();
-  },[])
+  },[]);
+
+  const isCourseAdded =(courseId)=> 
+     courseValues.includes(courseId)
+  
   return (
     <div>
     <div style={{display:"flex", marginTop:80,  justifyContent:"center", gap:90}}>
@@ -38,24 +51,22 @@ export const Purchase = () => {
     </div>
       <Typography color="#002D62" variant="h4" fontWeight="bold" style={{marginLeft:490, marginTop:30, fontSize:50}} >{course.title}</Typography>
       <Typography fontWeight="bold" style={{marginLeft:490, marginTop:30,marginRight:400, fontSize:20}} >{course.description}</Typography>
-      <Button variant="contained" style={{marginLeft:490,backgroundColor:"red",marginTop:30}} onClick={async () => {
+      <Button variant="contained" style={{marginLeft:490,marginTop:30}} onClick={async () => {
              try {
                
-                const response = await fetch(
-                  `${PORT_LINK}/users/courses/${course._id}`,
-                  {
-                    method: "POST", // You can use 'POST', 'PUT', 'DELETE', etc. as needed
-                    headers: {
-                      Authorization: `Bearer ${localStorage.getItem('tokenUser')}`,
-                    },
-                  }
+                const responsee = await axios.post(
+                  `${PORT_LINK}/users/courses/${course._id}`, {params}, {headers:{Authorization: `Bearer ${localStorage.getItem('tokenUser')}`}}
                 );
-               // console.log(response);
-                navigate(`/user/purchased/${course._id}`);
+               // console.log(responsee.data.purchasedCourses);
+                setValues(responsee.data.purchasedCourses)
+                
               } catch (err) {
                 console.log(err);
               }
-            }}>Purchase</Button>
+            }}
+            
+            disabled= {isCourseAdded(courseId)}
+            >{isCourseAdded(courseId) ? 'Purchased':'Purchase'}</Button>
     </div>
   );
 };
