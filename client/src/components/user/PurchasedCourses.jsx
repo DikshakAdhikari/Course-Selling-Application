@@ -27,7 +27,7 @@ export const PurchasedCourses = () => {
           variant={"h4"}
           style={{ display: "flex", justifyContent: "center", margin: 30 }}
         >
-          Courses to Purchase
+          Purchased Courses
         </Typography>
         <div
           style={{
@@ -51,8 +51,7 @@ export const PurchasedCourses = () => {
     const navigate = useNavigate();
   
     return (
-      <div  onClick={()=>{ //I tried to store the particular course out of multiple user courses to purchase in recoil, but it result set default values of recoil on reloading the Purchase.jsx page. So we will extract the course using the id of the course to purchase in purchase.jsx and then we'll store that particular course in our user db while clicking buy now button
-         navigate('/user/purchase/'+course._id)}}>
+      <div>
       <Card sx={{ maxWidth: 345 }}>
         <CardActionArea>
           <CardMedia
@@ -78,47 +77,6 @@ export const PurchasedCourses = () => {
   
       </div>
   
-  
-      // <div>
-      //   <Card
-      //     varint={"outlined"}
-      //     style={{ padding: 20, height: "50vh", width: "20vw" }}
-      //   >
-      //     <center>
-      //       <h1>{course.title}</h1>
-      //       <h3>{course.description}</h3>
-      //       <img
-      //         src={course.imageLink}
-      //         alt={course.title}
-      //         style={{ height: "140px" }}
-      //       />
-      //       <h3>{course.price}</h3>
-      //       <Button
-      //         variant="contained"
-      //         onClick={async () => {
-      //           try {
-      //             //console.log(course._id);
-      //             const response = await fetch(
-      //               `${PORT_LINK}/users/courses/${course._id}`,
-      //               {
-      //                 method: "POST", // You can use 'POST', 'PUT', 'DELETE', etc. as needed
-      //                 headers: {
-      //                   Authorization: `Bearer ${localStorage.getItem('tokenUser')}`,
-      //                 },
-      //               }
-      //             );
-      //            // console.log(response);
-      //             navigate(`/user/purchasedCourses/${course._id}`);
-      //           } catch (err) {
-      //             console.log(err);
-      //           }
-      //         }}
-      //       >
-      //         Buy Now
-      //       </Button>
-      //     </center>
-      //   </Card>
-      // </div>
     );
   };
   

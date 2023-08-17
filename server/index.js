@@ -169,7 +169,7 @@ app.post('/users/courses/:courseId',userAuthenticateJwt, async (req, res) => {
     const user = await User.findOne({username: req.user.username});
     //console.log(req.user);
     if(user){
-      user.purchasedCourses.push(course);
+      user.purchasedCourses.push(course._id);
       await user.save();
       //console.log(user);
       res.json({purchasedCourses: user.purchasedCourses});

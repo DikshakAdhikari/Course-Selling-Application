@@ -57,7 +57,7 @@ export const Purchase = () => {
                 const responsee = await axios.post(
                   `${PORT_LINK}/users/courses/${course._id}`, {params}, {headers:{Authorization: `Bearer ${localStorage.getItem('tokenUser')}`}}
                 );
-               // console.log(responsee.data.purchasedCourses);
+                console.log(responsee.data.purchasedCourses);
                 setValues(responsee.data.purchasedCourses)
                 
               } catch (err) {
