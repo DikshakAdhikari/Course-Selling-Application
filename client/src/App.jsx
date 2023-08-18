@@ -52,7 +52,7 @@ function App() {
         <Route path={"/user/signin"} element= {<UserSignin />} />    
         <Route path={"/user/userCourses"} element= {<UserCourses />} />    
         <Route path={"/user/purchase/:courseId"} element= {<Purchase />} />        
-        <Route path={"/user/userPurchasedCourses"} element= {<PurchasedCourses />} />    
+        <Route path={"/user/userPurchasedCourses"} element= {<PurchasedCourses />} />          
 
       </Routes>
 

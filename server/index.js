@@ -155,10 +155,15 @@ app.post('/users/login', async (req, res) => {
 });
 
 app.get('/users/courses', userAuthenticateJwt, async (req, res) => {
-  const userCourses= await Course.find({published: true});
+  try{
+    const userCourses= await Course.find({published: true});
   //console.log(userCourses);
   //const userCourses= await Course.find({});
 res.json({userCourses});
+  }catch(err){
+    res.sendStatus(403);
+  }
+  
   
 });
 
