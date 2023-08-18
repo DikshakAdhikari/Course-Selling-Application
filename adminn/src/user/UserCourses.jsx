@@ -32,7 +32,7 @@ export const UserCourses = () => {
       <Typography
         variant={"h4"}
         fontWeight="bold"
-        style={{ display: "flex", justifyContent: "center", margin: 30 }}
+        style={{ display: "flex", justifyContent: "center", margin: 30,color:"#002244" }}
       >
         Courses to Purchase
       </Typography>

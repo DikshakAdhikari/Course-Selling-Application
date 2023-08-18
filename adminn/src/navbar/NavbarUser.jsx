@@ -16,7 +16,7 @@ export const NavbarUser= ()=> {
   const [sidebar, setSidebar] = useState(false);
   const email = useRecoilValue(userState);
   const setRecoilValue= useSetRecoilState(userState)
-  console.log(email);
+ // console.log(email);
   const showSidebar = () => setSidebar(!sidebar);
   const navigate= useNavigate();
 
@@ -30,7 +30,7 @@ export const NavbarUser= ()=> {
           </Link>
          
           <Button
-          style={{marginRight:30}}
+          style={{marginRight:30, backgroundColor:"#AA0000"}}
             variant="contained"
             onClick={() => {
               localStorage.clear('tokenUser')

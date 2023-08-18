@@ -13,7 +13,7 @@ export const Dashboard = () => {
         }}>Register now</Button>
         </div>
         <div style={{marginRight:90,  }}>
-            <img style={{height:"40vh", width:"20vw",  borderColor:"black"}} src='https://images.pexels.com/photos/102061/pexels-photo-102061.jpeg?auto=compress&cs=tinysrgb&w=600' alt="" />
+            <img style={{height:"40vh", width:"20vw",  borderColor:"black"}} src='https://images.pexels.com/photos/730547/pexels-photo-730547.jpeg?auto=compress&cs=tinysrgb&w=600' alt="" />
         </div>
         
  

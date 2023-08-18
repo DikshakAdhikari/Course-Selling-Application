@@ -8,13 +8,15 @@ import axios from 'axios';
 
 
 import { Dashboard } from './user/Dashboard';
-import { RecoilRoot } from 'recoil';
+import { RecoilRoot, useSetRecoilState } from 'recoil';
 import { UserSignup } from './user/UserSignup';
 import { UserSignin } from './user/UserSignin';
 import { UserCourses } from './user/UserCourses';
 import { Purchase } from './user/Purchase';
 import { PurchasedCourses } from './user/PurchasedCourses';
 import { NavbarUser } from './navbar/NavbarUser';
+import { userState } from './store/atom/user';
+import { PORT_LINK } from '../config';
 
 
 function App() {
@@ -27,6 +29,7 @@ function App() {
     <Router>
         {/* <Appbar /> */}
     <NavbarUser />
+    <Init />
         {/* <InitUser /> */}
       <Routes>
 
@@ -46,42 +49,42 @@ function App() {
   )
 }
 
-// const Init = ()=> {
-//   const setUserEmail = useSetRecoilState(userState); 
-//   useEffect(()=> {
-//     const username = async()=> {
-//       if(localStorage.getItem('token')){
-//         try{
+const Init = ()=> {
+  const setUserEmail = useSetRecoilState(userState); 
+  useEffect(()=> {
+    const username = async()=> {
+      if(localStorage.getItem('tokenUser')){
+        try{
           
-//             const response = await axios.get(`${PORT_LINK}/admin/me`, {headers: {Authorization:`Bearer ${localStorage.getItem("token")}`}});
+            const response = await axios.get(`${PORT_LINK}/users/me`, {headers: {Authorization:`Bearer ${localStorage.getItem("tokenUser")}`}});
           
-//             if(response.data){
-//               setUserEmail({
-//                 isLoading: false,
-//                 userEmail: response.data
-//               });
-//             }else{
-//               setUserEmail({
-//                 isLoading:false,
-//                 userEmail: null
-//               })
-//             }
+            if(response.data){
+              setUserEmail({
+                isLoading: false,
+                userEmail: response.data
+              });
+            }else{
+              setUserEmail({
+                isLoading:false,
+                userEmail: null
+              })
+            }
 
-//           }catch(err){
-//             setUserEmail({
-//               isLoading:false,
-//               userEmail: null
-//             })
-//             console.log(err);
-//           }
-//         }
-//       }
-//       username();
-//     },[]);
-//     return (
-//       <></>
-//     )
-// }
+          }catch(err){
+            setUserEmail({
+              isLoading:false,
+              userEmail: null
+            })
+            console.log(err);
+          }
+        }
+      }
+      username();
+    },[]);
+    return (
+      <></>
+    )
+}
 
 // const InitUser = ()=> {
 //   const setUserEmail = useSetRecoilState(userCourseState); 

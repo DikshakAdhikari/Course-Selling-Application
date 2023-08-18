@@ -26,7 +26,7 @@ export const PurchasedCourses = () => {
         <Typography
          fontWeight="bold"
           variant={"h4"}
-          style={{ display: "flex", justifyContent: "center", margin: 30 }}
+          style={{ display: "flex", justifyContent: "center", margin: 30, color:"#002244" }}
         >
           Purchased Courses
         </Typography>

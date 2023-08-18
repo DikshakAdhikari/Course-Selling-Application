@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Button from '@mui/material/Button';
-import { Card, TextField, Typography } from '@mui/material';
+import { Card, TextField, Typography, Alert } from '@mui/material';
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom';
 import { PORT_LINK } from '../../config';
@@ -35,7 +35,8 @@ export const UserSignup = () => {
         <Button variant="contained" size={"large"} onClick={async()=> {
           const response = await axios.post(`${PORT_LINK}/users/signup`, {username: email , password: password});
           let data = response.data.token;
-          localStorage.setItem('tokenUser',data)
+          localStorage.setItem('tokenUser',data);
+          alert("Registered Successfully! Now login")
           navigate('/user/signin');
 
         }} >Signup</Button>

@@ -222,12 +222,12 @@ app.get('/admin/me' , authenticateJwt, async (req,res)=> {
 app.get('/users/me' , userAuthenticateJwt, async (req,res)=> {
   try{
     const username= req.user;
-    //console.log(username);
+    //console.log(username.username);
  
-  res.json(username);
+  res.json(username.username);
   }catch(err){
     console.log(err);
-    res.json(err)
+    res.sendStatus(403)
   }
   
 } );
