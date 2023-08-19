@@ -24,12 +24,8 @@ import { PORT_LINK } from './Config';
 import { userState } from './store/atoms/user';
 import { UpdateCourse } from '../src/components/admin/UpdateCourse';
 import { Dashboard } from '../src/components/admin/Dashboard';
-import { UserSignup } from './components/user/UserSignup';
-import { UserSignin } from './components/user/UserSignin';
-import { UserCourses } from './components/user/UserCourses';
-import { PurchasedCourses } from './components/user/PurchasedCourses';
-import { Purchase } from './components/user/Purchase';
-import { userCourseState } from './store/atoms/userCourses';
+import { NavbarUser } from './appNavbar/NavbarUser';
+
 function App() {
   
   return (
@@ -38,7 +34,7 @@ function App() {
     }>
       <RecoilRoot>
     <Router>
-        <Appbar />
+        <NavbarUser />
       <Init />
         {/* <InitUser /> */}
       <Routes>
@@ -48,11 +44,7 @@ function App() {
         <Route path={"/addCourses"} element= {<AddCourses />} />
         <Route path={"/courses"} element= {<Courses />} />
         <Route path={"/updateCourse/:courseId"} element= {<UpdateCourse />} />
-        <Route path={"/user/signup"} element= {<UserSignup />} />
-        <Route path={"/user/signin"} element= {<UserSignin />} />    
-        <Route path={"/user/userCourses"} element= {<UserCourses />} />    
-        <Route path={"/user/purchase/:courseId"} element= {<Purchase />} />        
-        <Route path={"/user/userPurchasedCourses"} element= {<PurchasedCourses />} />          
+       
 
       </Routes>
 
@@ -99,41 +91,6 @@ const Init = ()=> {
     )
 }
 
-const InitUser = ()=> {
-  const setUserEmail = useSetRecoilState(userCourseState); 
-  useEffect(()=> {
-    const username = async()=> {
-   
-        try{
-          
-            const response = await axios.get(`${PORT_LINK}/users/me`, {headers: {Authorization:`Bearer ${localStorage.getItem("tokenUser")}`}});
-          console.log(response);
-            if(response.data){
-              setUserEmail({
-                isLoading: false,
-                userCourse: response.data
-              });
-            }else{
-              setUserEmail({
-                isLoading:false,
-                userCourse: null
-              })
-            }
 
-          }catch(err){
-            setUserEmail({
-              isLoading:false,
-              userCourse: null
-            })
-            console.log(err);
-          }
-        
-      }
-      username();
-    },[]);
-    return (
-      <></>
-    )
-}
 
 export default App

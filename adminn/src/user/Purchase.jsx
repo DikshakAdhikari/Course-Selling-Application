@@ -46,13 +46,13 @@ export const Purchase = () => {
   
   return (
     <div>
-    <div style={{display:"flex", marginTop:80,  justifyContent:"center", gap:90}}>
-      <img src={course.imageLink} alt={course.title}  style={{borderRadius:50, width:"20vw", height:"30vh", marginLeft:400}}/>
-      <img src={imgg} alt="" style={{height:"30vh", width:"40vw", }} />
+    <div style={{display:"flex", marginTop:80, marginLeft:60, gap:90}}>
+      <img src={course.imageLink} alt={course.title}  style={{borderRadius:50, width:"20vw", height:"30vh", marginLeft:4}}/>
+      <img src={imgg} alt="" style={{height:"30vh", width:"30vw", }} />
     </div>
-      <Typography color="#002D62" variant="h4" fontWeight="bold" style={{marginLeft:490, marginTop:30, fontSize:50}} >{course.title}</Typography>
-      <Typography fontWeight="bold" style={{marginLeft:490, marginTop:30,marginRight:400, fontSize:20}} >{course.description}</Typography>
-      <Button variant="contained" style={{marginLeft:490,marginTop:30}} onClick={async () => {
+      <Typography color="#002D62" variant="h4" fontWeight="bold" style={{marginLeft:150, marginTop:30, fontSize:50}} >{course.title}</Typography>
+      <Typography fontWeight="bold" style={{marginLeft:120,width:"45%", marginTop:30,marginRight:150, fontSize:20}} >{course.description}</Typography>
+      <Button variant="contained" style={{marginLeft:150,marginTop:30}} onClick={async () => {
              try {
                
                 const responsee = await axios.post(

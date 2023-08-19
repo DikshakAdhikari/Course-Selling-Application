@@ -105,13 +105,6 @@ export const AddCourses = () => {
           >
             Add Course
           </Button>
-          <Button
-            variant="contained"
-            size={"large"}
-            onClick={() => navigate("/courses")}
-          >
-            All Courses
-          </Button>
         </Card>
       </div>
     </div>
