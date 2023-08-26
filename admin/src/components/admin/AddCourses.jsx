@@ -12,12 +12,12 @@ export const AddCourses = () => {
   const [imageLink, setImage] = useState("");
   const [published, setPublished] = useState("");
   const navigate = useNavigate();
-  console.log(published);
+  //console.log(published);
   return (
     <div>
       <div
         style={{
-          paddingTop: 150,
+          paddingTop: 40,
           marginBottom: 10,
           display: "flex",
           justifyContent: "center",
@@ -83,7 +83,9 @@ export const AddCourses = () => {
           </FormControl>
           <br />
           <br />
+          <center>
           <Button
+          style={{backgroundColor:"#FEBE10"}}
             variant="contained"
             size={"large"}
             onClick={async () => {
@@ -98,6 +100,7 @@ export const AddCourses = () => {
                   }
                 );
                 alert("Course Created Successfully!");
+                navigate('/courses')
               } catch (err) {
                 console.log(err);
               }
@@ -105,6 +108,7 @@ export const AddCourses = () => {
           >
             Add Course
           </Button>
+          </center>
         </Card>
       </div>
     </div>

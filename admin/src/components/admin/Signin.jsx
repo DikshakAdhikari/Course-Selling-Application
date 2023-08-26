@@ -68,7 +68,7 @@ export const Signin = () => {
                     userEmail:email,
                     isLoading:false
                   });
-                  navigate('/');
+                  navigate('/courses');
                 
               } catch (error) {
                 console.log(error);

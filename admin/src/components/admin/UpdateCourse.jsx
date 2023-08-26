@@ -87,7 +87,7 @@ const UpdateCard = () => {
     <div>
       <div
         style={{
-          paddingTop: 150,
+          paddingTop: 50,
           marginBottom: 10,
           display: "flex",
           justifyContent: "center",
@@ -158,8 +158,10 @@ const UpdateCard = () => {
           <br />
           <br />
 
+          <div style={{display:"flex", justifyContent:"center", gap:6}}>
           <Button
             variant="contained"
+            style={{backgroundColor:"#1B4D3E"}}
             size={"large"}
             onClick={async () => {
               try{
@@ -200,7 +202,7 @@ const UpdateCard = () => {
           }
 
           >
-            Update Course
+            Update
           </Button>
 
 
@@ -209,6 +211,7 @@ const UpdateCard = () => {
 
           <Button
             variant="contained"
+            style={{backgroundColor:"#AA0000"}}
             size={"large"}
             onClick={async () => {
               const confirmDelete = window.confirm('Are you sure you want to delete this item?');
@@ -233,8 +236,9 @@ const UpdateCard = () => {
           }
 
           >
-            Delete Course
+            Delete
           </Button>
+          </div>
         </Card>
       </div>
     </div>

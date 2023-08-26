@@ -17,7 +17,7 @@ export const UserCourses = () => {
             Authorization: `Bearer ${localStorage.getItem("tokenUser")}`,
           },
         });
-        // console.log(cou.data.userCourses);
+        console.log(cou.data.userCourses);
         setCourses(cou.data.userCourses);
       } catch (err) {
         console.log(err);
