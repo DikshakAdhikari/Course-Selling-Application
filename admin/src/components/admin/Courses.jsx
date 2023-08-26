@@ -48,24 +48,6 @@ export const Courses = () => {
 
 const Course = ({ course }) => {
   const navigate = useNavigate();
-  // console.log("wwweeee");
-  //        return (<div >
-  //         <Card varint={"outlined"} style={{ padding: 20, height:"50vh", width:"20vw"}}>
-  //           <center>
-  //             <h1>{course.title}</h1>
-  //             <h3>{course.description}</h3>
-  //             <img src={course.imageLink} alt={course.title} style={{height:"140px"}} />
-  //             <h3>{course.price}</h3>
-  //             <Button variant="contained"
-  //             onClick={()=> {
-
-  //              navigate(`/updateCourse/${course._id}`)
-  //             }}>Edit</Button>
-  //             </center>
-  //             </Card>
-  //         </div>
-  //        )
-  // }
 
   return (
     <div style={{ marginTop: 20, backgroundColor: "#eeeeee" }}>
