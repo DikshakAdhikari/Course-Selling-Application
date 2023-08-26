@@ -12,7 +12,7 @@ import {
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import imgg from '../pic/picCourse.png'
-import { PORT_LINK } from "../../config";
+import { PORT_LINK } from "../../Config";
 
 
 
@@ -25,14 +25,14 @@ export const Purchase = () => {
   const navigate= useNavigate()
   useEffect(()=> {
     const fun  = async()=> {
-      const course = await axios.get('http://localhost:3000/users/'+courseId , {headers: {Authorization:'Bearer '+localStorage.getItem('tokenUser')}});
+      const course = await axios.get(`${PORT_LINK}/users/${courseId}` , {headers: {Authorization:'Bearer '+localStorage.getItem('tokenUser')}});
      // console.log(course.data.course);
       setCourse(course.data.course)
     }
 
     const purchasedIds= async ()=> {
-      const courseIds= await axios.get('http://localhost:3000/users/ids/purchasedCourses', {headers: {Authorization:'Bearer '+localStorage.getItem('tokenUser')}});
-      console.log(courseIds.data.purchasedCoursesIds);
+      const courseIds= await axios.get(`${PORT_LINK}/users/ids/purchasedCourses`, {headers: {Authorization:'Bearer '+localStorage.getItem('tokenUser')}});
+      //console.log(courseIds.data.purchasedCoursesIds);
       setValues(courseIds.data.purchasedCoursesIds)
 
     }

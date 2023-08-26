@@ -16,7 +16,8 @@ import { Purchase } from './user/Purchase';
 import { PurchasedCourses } from './user/PurchasedCourses';
 import { NavbarUser } from './navbar/NavbarUser';
 import { userState } from './store/atom/user';
-import { PORT_LINK } from '../config';
+import { PORT_LINK } from '../Config';
+
 
 
 function App() {

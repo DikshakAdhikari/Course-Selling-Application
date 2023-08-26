@@ -13,8 +13,9 @@ import {
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import imgg from "../pic/picCourse.png";
-import { PORT_LINK } from "../../config";
+
 import { userState } from "../store/atom/user";
+import { PORT_LINK } from "../../Config";
 
 export const UserPurchase = () => {
   const params = useParams();
@@ -26,7 +27,7 @@ export const UserPurchase = () => {
   useEffect(() => {
     const fun = async () => {
       const course = await axios.get(
-        "http://localhost:3000/users/" + courseId,
+        `${PORT_LINK}/users/` + courseId,
         {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("tokenUser"),
@@ -39,7 +40,7 @@ export const UserPurchase = () => {
 
     const purchasedIds = async () => {
       const courseIds = await axios.get(
-        "http://localhost:3000/users/ids/purchasedCourses",
+        `${PORT_LINK}/users/ids/purchasedCourses`,
         {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("tokenUser"),

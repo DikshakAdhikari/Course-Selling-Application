@@ -3,7 +3,8 @@ import React, { useEffect, useState } from "react";
 
 import { Button, Card, CardActionArea, CardContent, CardMedia, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { PORT_LINK } from "../../config";
+import { PORT_LINK } from "../../Config";
+
 
 export const PurchasedCourses = () => {
   const [purchased, getPurchased]= useState([]);

@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 import { Card, TextField, Typography, Alert } from '@mui/material';
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom';
-import { PORT_LINK } from '../../config';
+import { PORT_LINK } from '../../Config';
 
 
 
