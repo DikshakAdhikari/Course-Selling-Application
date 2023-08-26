@@ -1,1 +1,1 @@
-export const PORT_LINK = "https://selling-course-34fx.vercel.app/"
+export const PORT_LINK = "https://selling-course-34fx.vercel.app"
