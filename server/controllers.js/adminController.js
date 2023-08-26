@@ -1,6 +1,5 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const { User, Course, Admin } = require("../connection/db");
+
+const { Course, Admin } = require("../connection/db");
 const jwt = require('jsonwebtoken');
 
 exports.adminSignup = (req, res) => {

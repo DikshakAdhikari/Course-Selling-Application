@@ -1,4 +1,3 @@
-const express = require('express');
 const mongoose = require("mongoose");
 // Define mongoose schemas
 const userSchema = new mongoose.Schema({
