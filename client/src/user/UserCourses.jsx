@@ -3,7 +3,8 @@ import React, { useEffect, useState } from "react";
 
 import { Button, Card, CardActionArea, CardContent, CardMedia, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { PORT_LINK } from "../../config";
+import { PORT_LINK } from "../../Config";
+
 
 export const UserCourses = () => {
   
@@ -17,7 +18,7 @@ export const UserCourses = () => {
             Authorization: `Bearer ${localStorage.getItem("tokenUser")}`,
           },
         });
-        console.log(cou.data.userCourses);
+        //console.log(cou.data.userCourses);
         setCourses(cou.data.userCourses);
       } catch (err) {
         console.log(err);
@@ -88,45 +89,5 @@ const Course = ({ course }) => {
     </div>
 
 
-    // <div>
-    //   <Card
-    //     varint={"outlined"}
-    //     style={{ padding: 20, height: "50vh", width: "20vw" }}
-    //   >
-    //     <center>
-    //       <h1>{course.title}</h1>
-    //       <h3>{course.description}</h3>
-    //       <img
-    //         src={course.imageLink}
-    //         alt={course.title}
-    //         style={{ height: "140px" }}
-    //       />
-    //       <h3>{course.price}</h3>
-    //       <Button
-    //         variant="contained"
-    //         onClick={async () => {
-    //           try {
-    //             //console.log(course._id);
-    //             const response = await fetch(
-    //               `${PORT_LINK}/users/courses/${course._id}`,
-    //               {
-    //                 method: "POST", // You can use 'POST', 'PUT', 'DELETE', etc. as needed
-    //                 headers: {
-    //                   Authorization: `Bearer ${localStorage.getItem('tokenUser')}`,
-    //                 },
-    //               }
-    //             );
-    //            // console.log(response);
-    //             navigate(`/user/purchasedCourses/${course._id}`);
-    //           } catch (err) {
-    //             console.log(err);
-    //           }
-    //         }}
-    //       >
-    //         Buy Now
-    //       </Button>
-    //     </center>
-    //   </Card>
-    // </div>
   );
 };
