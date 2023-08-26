@@ -80,7 +80,7 @@ const Init = ()=> {
               isLoading:false,
               userEmail: null
             })
-            console.log(err);
+            // console.log(err);
           }
         }
       }
