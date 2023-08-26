@@ -1,7 +1,5 @@
 const express = require('express');
-const mongoose = require("mongoose");
 const jwt= require('jsonwebtoken');
-
 const authenticateJwt = (req, res, next) => {
     const authHeader = req.headers.authorization;
     if (authHeader) {
