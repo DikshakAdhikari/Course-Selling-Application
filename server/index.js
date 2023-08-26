@@ -8,7 +8,7 @@ dotenv.config()
 const app = express();
 
 const allowedOrigins = [
-    'https://dikshak-admin-course.vercel.app/'
+    'https://dikshak-admin-course.vercel.app'
     // Add more allowed origins if needed
   ];
   
