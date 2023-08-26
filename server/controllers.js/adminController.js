@@ -1,4 +1,3 @@
-
 const { Course, Admin } = require("../connection/db");
 const jwt = require('jsonwebtoken');
 

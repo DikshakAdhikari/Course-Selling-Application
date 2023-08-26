@@ -1,4 +1,3 @@
-const express = require('express');
 const { User, Course } = require("../connection/db");
 const jwt = require('jsonwebtoken');
 

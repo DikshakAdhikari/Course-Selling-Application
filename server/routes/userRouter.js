@@ -1,5 +1,4 @@
 const express = require('express');
-const jwt = require('jsonwebtoken');
 const userAuthenticateJwt = require("../middlewares/verifyUser");
 const { getUsername, getUserCourses, userSignup, userSignin, getParticularCourse, postUserCourse, getUserPurchasedCourses, getUserPurchaseCoursesIds } = require("../controllers.js/userController");
 const router= express.Router()

@@ -1,7 +1,5 @@
-const mongoose = require("mongoose");
 const express = require('express');
 const authenticateJwt = require("../middlewares/verifyAdmin");
-const jwt = require('jsonwebtoken');
 const { getAdminUsername, adminSignup, adminSignin, adminCourses, updateAdminCourse, getAdminCourses, getParticularAdminCourse, deleteAdminCourse } = require("../controllers.js/adminController");
 const router= express.Router()
 
